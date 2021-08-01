@@ -1,0 +1,22 @@
+{
+  "name": "react-native-scientific-calculator",
+  "description": "Themable Basic and Scientific Calculator for React Native",
+  "author": "Rohan Gaikwad",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+  },
+  "license": "MIT",
+  "keywords": ["calculator", "react", "react-native", "native", "scientific calculator"],
+  "homepage": "https://github.com/rohangaikwad/react-native-scientific-calculator",
+  "peerDependencies": {
+    "lodash": "^4.17.0",
+    "mathjs": "^9.0.0",
+    "react": "^17.0.0",
+    "react-native": "^0.60.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rohangaikwad/react-native-scientific-calculator"
+  }
+}

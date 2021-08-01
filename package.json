@@ -5,6 +5,7 @@
   "version": "0.0.3",
   "main": "index.js",
   "scripts": {
+      "publish": "npm publish"
   },
   "license": "MIT",
   "keywords": ["calculator", "react", "react-native", "native", "scientific calculator"],

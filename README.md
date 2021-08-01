@@ -7,6 +7,7 @@ or yarn:
 
 ```
 yarn add react-native-scientific-calculator
+```
 
 ### Usage
 

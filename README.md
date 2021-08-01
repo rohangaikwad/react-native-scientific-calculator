@@ -1,3 +1,5 @@
+# react-native-scientific-calculator
+
 ## Installation
 Using npm:
 ```sh
@@ -35,4 +37,3 @@ const App = () => {
 export default App;
 ```
 
-# react-native-scientific-calculator

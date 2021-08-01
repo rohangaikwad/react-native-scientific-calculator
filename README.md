@@ -1,4 +1,4 @@
-# react-native-scientific-calculator
+# React Native Scientific Calculator
 
 ## Installation
 Using npm:

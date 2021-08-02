@@ -1,7 +1,6 @@
 import React, { useState, createContext, useEffect } from "react";
 import { Appearance } from 'react-native';
 import { merge } from "lodash";
-//import DefaultStyles from "./DefaultStyles";
 
 export const ThemeContext = createContext();
 
@@ -81,7 +80,6 @@ export const ThemeContextProvider = props => {
         if(init) return;
         init = true;
         let themeType = theme || colorScheme;
-        console.log(themeType)
         const _defaultColors = themeType === "light" ? lightThemeColors : darkThemeColors;
         let merged = merge(_defaultColors, customize);
         setColors(merged);

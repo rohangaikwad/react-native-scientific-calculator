@@ -142,7 +142,8 @@ export const ThemeContextProvider = props => {
                 alignItems: "center",
                 justifyContent: "flex-end",
                 lineHeight: 20,
-                fontSize: 20
+                fontSize: 20,
+                marginTop: 5
             },
             buttonEquals: {
                 ...btn,

@@ -2,7 +2,7 @@
   "name": "react-native-scientific-calculator",
   "description": "Themable Basic and Scientific Calculator for React Native",
   "author": "Rohan Gaikwad",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "index.js",
   "scripts": {
   },

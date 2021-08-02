@@ -1,3 +1,7 @@
+# v0.1.2
+## Fixes
+* Spacing between expression and result
+
 # v0.1.1
 ## Fixes
 * Parenthesis long press not working because of onPressIn

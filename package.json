@@ -10,7 +10,6 @@
   "keywords": ["calculator", "react", "react-native", "native", "scientific calculator"],
   "homepage": "https://github.com/rohangaikwad/react-native-scientific-calculator",
   "peerDependencies": {
-    "lodash": "^4.17.0",
     "mathjs": "^9.0.0",
     "react": "^16.10.0",
     "react-native": "*"

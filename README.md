@@ -38,6 +38,13 @@ export default App;
 ```
 
 
+### Screenshots
+| Light Theme - Standard | Dark Theme - Standard | Dark Theme - Scientific |
+| ---------------------- | --------------------- | ----------------------- |
+| ![alt Select Package](https://raw.githubusercontent.com/rohangaikwad/react-native-scientific-calculator/main/assets/light-standard.jpg) | ![alt Select Package](https://raw.githubusercontent.com/rohangaikwad/react-native-scientific-calculator/main/assets/dark-standard.jpg) | ![alt Select Package](https://raw.githubusercontent.com/rohangaikwad/react-native-scientific-calculator/main/assets/dark-scientific.jpg) |
+
+
+
 ### Props
 
 

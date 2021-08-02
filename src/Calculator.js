@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View, Text, TouchableOpacity, Button, Platform } from "react-native";
+import { View, Text, TouchableOpacity, Vibration, Platform } from "react-native";
 import { evaluate } from "mathjs";
 import { ThemeContext } from "./ThemeContext";
 import { merge } from "lodash";
 
-const Calculators = ({ showLiveResult, scientific: showScientific, customize, theme }) => {
+const Calculators = ({ showLiveResult, scientific: showScientific, customize, theme, haptics }) => {
     const [expr, setExpr] = useState([]);
     const [result, setResult] = useState(0);
     const [equalled, setEqualled] = useState(false);
     const [degRad, setDegRad] = useState("deg");
     const [inverted, setInverted] = useState(false);
+    const canVibrate = haptics || true;
 
     const { styles, customizeColors, customizeTheme, isLoading } = useContext(ThemeContext);
 
@@ -48,7 +49,13 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
         }
     }, [expr]);
 
+    const Vibrate = () => {
+        if(!canVibrate) return;
+        Vibration.vibrate(20)
+    }
+
     const calculate = () => {
+        Vibrate();
         let res = result;
         try {
             res = evaluate(expr.join(""));
@@ -71,6 +78,7 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
     }
 
     const numPressed = (val) => {
+        Vibrate();
         if (equalled) {
             setExpr([val]);
         } else {
@@ -85,12 +93,14 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
     }
 
     const buttonPressed = (val) => {
+        Vibrate();
         setExpr([...expr, val]);
         setEqualled(false);
         //calculate();
     }
 
     const functionPressed = (val) => {
+        Vibrate();
         if (equalled) {
             setExpr([val, ...expr, ')']);
         } else {
@@ -111,6 +121,7 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
     }
 
     const deleteHandler = () => {
+        Vibrate();
         if (expr.length > 0) {
             let _expr = [...expr];
             if (equalled) {
@@ -126,10 +137,12 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
     }
 
     const clearHandler = () => {
+        Vibrate();
         setExpr([]);
     }
 
     const dotHandler = () => {
+        Vibrate();
         if (equalled) {
             setExpr([0, "."]);
         } else {

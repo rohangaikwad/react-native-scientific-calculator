@@ -1,6 +1,10 @@
+# v0.1.4
+## Fixes
+* Added Natural log function
+
 # v0.1.3
 ## Fixes
-* BUtton and expression font sizes
+* Button and expression font sizes
 
 # v0.1.2
 ## Fixes

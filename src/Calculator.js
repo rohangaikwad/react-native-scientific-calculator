@@ -1,8 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, Text, TouchableOpacity, Vibration, Platform } from "react-native";
-import { evaluate } from "mathjs";
+import { create, all } from "mathjs";
 import { ThemeContext } from "./ThemeContext";
-import { merge } from "lodash";
+
+const Mathjs = create(all);
+
+const ln = (num) => Math.log(num);
+ln.transform = (num) => ln(num);
+Mathjs.import({ln:ln})
+
 
 const Calculators = ({ showLiveResult, scientific: showScientific, customize, theme, haptics }) => {
     const [expr, setExpr] = useState([]);
@@ -22,7 +28,7 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
         if (!showLiveResult) return;
         let res = result;
         try {
-            res = evaluate(expr.join(""));
+            res = Mathjs.evaluate(expr.join(""));
         } catch (error) {
             //console.log(error)
         }
@@ -58,7 +64,7 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
         Vibrate();
         let res = result;
         try {
-            res = evaluate(expr.join(""));
+            res = Mathjs.evaluate(expr.join(""));
         } catch (error) {
             //console.log(error)
         }

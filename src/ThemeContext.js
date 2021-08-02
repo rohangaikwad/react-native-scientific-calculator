@@ -1,6 +1,5 @@
 import React, { useState, createContext, useEffect } from "react";
 import { Appearance } from 'react-native';
-import { merge } from "lodash";
 
 export const ThemeContext = createContext();
 
@@ -80,16 +79,12 @@ export const ThemeContextProvider = props => {
         if(init) return;
         init = true;
         let themeType = theme || colorScheme;
+        console.log(themeType)
         const _defaultColors = themeType === "light" ? lightThemeColors : darkThemeColors;
-        let merged = merge(_defaultColors, customize);
+        let merged = {..._defaultColors, ...customize};
         setColors(merged);
     }
 
-
-    const customizeColors = (colorValues) => {
-        console.log(colorValues, colors);
-        setColors(merge(colors, colorValues));
-    }
 
     const generateStyles = () => {
         const { bg, buttonBg, previewBg, equalsBg, clearBg, numberBg, displayBg, buttonTextColor, numberButtonTextColor, clearButtonTextColor, equalsButtonTextColor, previewTextColor, expressionTextColor, borderColor, borderRadius, spacing, fontSize, exprFontSize } = colors;
@@ -178,7 +173,6 @@ export const ThemeContextProvider = props => {
     const [value, setValue] = useState({
         styles: styles,
         colors: colors,
-        //customizeColors: customizeColors,
         customizeTheme: customizeTheme,
         isLoading: isLoading
     })

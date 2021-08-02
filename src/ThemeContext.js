@@ -30,7 +30,9 @@ export const ThemeContextProvider = props => {
         expressionTextColor: '#000000',
         borderColor: '#f9f9f9',
         borderRadius: 5,
-        spacing: 2
+        spacing: 2,
+        fontSize: 16,
+        exprFontSize: 30
     }
 
     const darkThemeColors = {
@@ -49,7 +51,9 @@ export const ThemeContextProvider = props => {
         expressionTextColor: '#ffffff',
         borderColor: '#21252d',
         borderRadius: 5,
-        spacing: 2
+        spacing: 2,
+        fontSize: 16,
+        exprFontSize: 30
     }
 
     useEffect(() => {
@@ -90,7 +94,7 @@ export const ThemeContextProvider = props => {
     }
 
     const generateStyles = () => {
-        const { bg, buttonBg, previewBg, equalsBg, clearBg, numberBg, displayBg, buttonTextColor, numberButtonTextColor, clearButtonTextColor, equalsButtonTextColor, previewTextColor, expressionTextColor, borderColor, borderRadius, spacing } = colors;
+        const { bg, buttonBg, previewBg, equalsBg, clearBg, numberBg, displayBg, buttonTextColor, numberButtonTextColor, clearButtonTextColor, equalsButtonTextColor, previewTextColor, expressionTextColor, borderColor, borderRadius, spacing, fontSize, exprFontSize } = colors;
 
         const btn = {
             borderWidth: spacing,
@@ -101,7 +105,7 @@ export const ThemeContextProvider = props => {
             flex: 1,
             alignItems: "center",
             justifyContent: "center",
-            fontSize: 20,
+            fontSize: fontSize,
             fontWeight: "normal"
         }
 
@@ -116,7 +120,8 @@ export const ThemeContextProvider = props => {
                 padding: 5,
                 flex: 1.5,
                 flexShrink: 0,
-                justifyContent: "center"
+                justifyContent: "center",
+                minHeight: exprFontSize * 2
             },
             row: {
                 display: "flex",
@@ -130,8 +135,8 @@ export const ThemeContextProvider = props => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "flex-end",
-                fontSize: 40,
-                lineHeight: 40,
+                fontSize: exprFontSize,
+                lineHeight: exprFontSize,
                 fontWeight: "bold",
                 marginTop: "auto"
             },
@@ -141,8 +146,8 @@ export const ThemeContextProvider = props => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "flex-end",
-                lineHeight: 20,
-                fontSize: 20,
+                lineHeight: exprFontSize * 0.5,
+                fontSize: exprFontSize * 0.5,
                 marginTop: 5
             },
             buttonEquals: {

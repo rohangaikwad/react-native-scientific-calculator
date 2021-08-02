@@ -64,6 +64,8 @@ export default App;
 | --------------------- | ----------------- | ------------------------------------------------ |
 | borderRadius          | number            | border radius of buttons                         |
 | spacing               | number            | spacing between buttons                          |
+| fontSize              | number            | button font size                                 |
+| exprFontSize          | number            | expression font size                             |
 | bg                    | string            | Calculator background color                      |
 | buttonBg              | string            | Button background color                          |
 | previewBg             | string            | Live calculations preview panel background color |
@@ -77,4 +79,4 @@ export default App;
 | clearButtonTextColor  | string            | Clear button text color                          |
 | equalsButtonTextColor | string            | Equals button text color                         |
 | previewTextColor      | string            | Preview text color                               |
-| expressionTextColor   | string            | Expression text color         |
+| expressionTextColor   | string            | Expression text color                            |

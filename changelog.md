@@ -1,3 +1,7 @@
+# v0.1.3
+## Fixes
+* BUtton and expression font sizes
+
 # v0.1.2
 ## Fixes
 * Spacing between expression and result

@@ -287,7 +287,7 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
             <TouchableOpacity style={styles.button} onPressIn={() => functionPressed("sqrt(")}>
                 <StyledText style={styles.button}>√</StyledText>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPressIn={() => buttonPressed("(")} onLongPress={() => buttonPressed(")")} >
+            <TouchableOpacity style={styles.button} onPress={() => buttonPressed("(")} onLongPress={() => buttonPressed(")")} >
                 <StyledText style={styles.button}>()</StyledText>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPressIn={() => buttonPressed("!")}>

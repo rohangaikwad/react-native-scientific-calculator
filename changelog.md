@@ -1,3 +1,7 @@
+# v0.1.5
+## Fixes
+* Move mathjs from peerDependencies to dependencies
+
 # v0.1.4
 ## Fixes
 * Added Natural log function

@@ -9,9 +9,6 @@ export const ThemeContextProvider = props => {
     const [colors, setColors] = useState({});
     const [isLoading, setLoading] = useState(true);
 
-    //constant defaultColors = 
-
-
     const lightThemeColors = {
         bg: '#f9f9f9',
         buttonBg: '#f1f3f4',

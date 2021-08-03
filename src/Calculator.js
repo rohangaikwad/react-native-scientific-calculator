@@ -18,7 +18,7 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
     const [inverted, setInverted] = useState(false);
     const canVibrate = haptics || true;
 
-    const { styles, customizeColors, customizeTheme, isLoading } = useContext(ThemeContext);
+    const { styles, customizeTheme, isLoading } = useContext(ThemeContext);
 
     useEffect(() => {
         customizeTheme({ theme, customize });

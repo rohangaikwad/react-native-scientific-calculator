@@ -80,3 +80,9 @@ export default App;
 | equalsButtonTextColor | string            | Equals button text color                         |
 | previewTextColor      | string            | Preview text color                               |
 | expressionTextColor   | string            | Expression text color                            |
+
+
+### Demo
+Download [Expo Go](https://expo.dev/client) and scan the QR code to get started
+
+![alt Snack Demo](https://raw.githubusercontent.com/rohangaikwad/react-native-scientific-calculator/main/assets/snack-qr.png)

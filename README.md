@@ -52,7 +52,7 @@ export default App;
 | --------------- | ------------------------------------------- | ------------- | ----------------------------------- |
 | theme           | string                                      | light         | Choose between `light` and `dark` themes |
 | scientific      | boolean                                     | false         | Toggle between standard & scientific calculator  |
-| showLiveResult  | boolean                                     | false         | Toggle live calculation preview     |
+| showLiveResult  | boolean                                     | false         | Toggle live calculation preview (_This can slow down the app on mobile_)     |
 | haptics         | boolean                                     | true          | Enable vibration on button press    |
 | customize       | Object                                      |               | Customize text & background colors. See below for list of possible customizations  |
 

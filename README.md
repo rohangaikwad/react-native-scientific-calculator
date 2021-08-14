@@ -83,6 +83,6 @@ export default App;
 
 
 ### Demo
-Download [Expo Go](https://expo.dev/client) and scan the QR code to get started
+Download [Expo Go](https://expo.dev/client) and scan the QR code to get started or try this on [Snack](https://snack.expo.dev/@rohanvg/react-native-scientific-calculator---demo)
 
 ![alt Snack Demo](https://raw.githubusercontent.com/rohangaikwad/react-native-scientific-calculator/main/assets/snack-qr.png)

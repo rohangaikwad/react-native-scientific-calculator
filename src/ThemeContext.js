@@ -76,7 +76,7 @@ export const ThemeContextProvider = props => {
         if(init) return;
         init = true;
         let themeType = theme || colorScheme;
-        console.log(themeType)
+        //console.log(themeType)
         const _defaultColors = themeType === "light" ? lightThemeColors : darkThemeColors;
         let merged = {..._defaultColors, ...customize};
         setColors(merged);
@@ -104,14 +104,11 @@ export const ThemeContextProvider = props => {
                 backgroundColor: bg,
                 flex: 1
             },
-            display: {
-                backgroundColor: displayBg,
-                alignItems: "flex-end",
-                padding: 5,
-                flex: 1.5,
-                flexShrink: 0,
-                justifyContent: "center",
-                minHeight: exprFontSize * 2
+            tooltipContainer: {
+                flex: 1, flexDirection: "row", background: buttonBg, alignItems: "center"
+            },
+            tooltip: {
+                color: buttonTextColor, flex: 8, fontSize: fontSize * 0.8, paddingLeft: 5, opacity: 0.5
             },
             row: {
                 display: "flex",
@@ -119,15 +116,25 @@ export const ThemeContextProvider = props => {
                 flex: 1
             },
             button: btn,
+            display: {
+                backgroundColor: displayBg,
+                padding: 5,
+                flex: 1.5,
+                flexShrink: 0,
+                justifyContent: "center",
+                minHeight: exprFontSize * 2.3,
+            },
             expression: {
+                flex: 1,
                 backgroundColor: "transparent",
                 color: expressionTextColor,
                 display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
+                textAlign: "right",
+                alignItems: "flex-end",
                 fontSize: exprFontSize,
                 lineHeight: exprFontSize,
                 fontWeight: "bold",
+                //minHeight: exprFontSize * 2.2,
                 marginTop: "auto"
             },
             result: {

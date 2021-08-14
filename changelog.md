@@ -1,3 +1,7 @@
+# v0.1.6
+## New Feature
+* Helper tooltip
+
 # v0.1.5
 ## Fixes
 * Move mathjs from peerDependencies to dependencies

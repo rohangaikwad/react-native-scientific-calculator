@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View, Text, TouchableOpacity, Vibration, Platform } from "react-native";
+import { View, Text, TouchableOpacity, Vibration, Platform, TextInput, PixelRatio } from "react-native";
 import { create, all } from "mathjs";
 import { ThemeContext } from "./ThemeContext";
 
@@ -7,16 +7,18 @@ const Mathjs = create(all);
 
 const ln = (num) => Math.log(num);
 ln.transform = (num) => ln(num);
-Mathjs.import({ln:ln})
+Mathjs.import({ ln: ln })
 
 
-const Calculators = ({ showLiveResult, scientific: showScientific, customize, theme, haptics }) => {
-    const [expr, setExpr] = useState([]);
+const Calculators = ({ showLiveResult, scientific: showScientific, customize, theme, haptics, history, showTooltip }) => {
+    const [expr, setExpr] = useState([0]);
     const [result, setResult] = useState(0);
     const [equalled, setEqualled] = useState(false);
-    const [degRad, setDegRad] = useState("deg");
     const [inverted, setInverted] = useState(false);
+    const [tooltip, setTooltip] = useState("");
     const canVibrate = haptics || true;
+    const historyEnabled = history || false;
+    const tooltipEnabled = showTooltip || false;
 
     const { styles, customizeTheme, isLoading } = useContext(ThemeContext);
 
@@ -56,7 +58,7 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
     }, [expr]);
 
     const Vibrate = () => {
-        if(!canVibrate) return;
+        if (!canVibrate) return;
         Vibration.vibrate(20)
     }
 
@@ -83,7 +85,8 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
         setEqualled(true);
     }
 
-    const numPressed = (val) => {
+    const numPressed = (val, tip = "") => {
+        setTooltip(tip);
         Vibrate();
         if (equalled) {
             setExpr([val]);
@@ -98,14 +101,16 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
         //calculate();
     }
 
-    const buttonPressed = (val) => {
+    const buttonPressed = (val, tip = "") => {
+        setTooltip(tip);
         Vibrate();
         setExpr([...expr, val]);
         setEqualled(false);
         //calculate();
     }
 
-    const functionPressed = (val) => {
+    const functionPressed = (val, tip = "") => {
+        setTooltip(tip);
         Vibrate();
         if (equalled) {
             setExpr([val, ...expr, ')']);
@@ -144,7 +149,7 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
 
     const clearHandler = () => {
         Vibrate();
-        setExpr([]);
+        setExpr([0]);
     }
 
     const dotHandler = () => {
@@ -167,9 +172,26 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
         setEqualled(false);
     }
 
+    const ToolTipHistory = () => <View style={{ flex: .5, backgroundColor: "blue" }}>
+        <View style={styles.tooltipContainer}>
+            {tooltipEnabled && <Text style={styles.tooltip}>{tooltip}</Text>}
+            {historyEnabled && <TouchableOpacity style={{ ...styles.button, backgroundColor: "transparent", borderColor: "transparent" }} onPressIn={() => console.log("history")}>
+                <StyledText style={styles.button}>◷</StyledText>
+            </TouchableOpacity>}
+        </View>
+    </View>
 
     const Display = () => <View style={styles.display}>
-        <Text style={styles.expression}>{expr.join("")}</Text>
+        <TextInput
+            onContentSizeChange={x => {
+                //console.log(x)
+            }}
+            style={styles.expression}
+            multiline={true}
+            value={expr.join("")}
+            textAlign="right"
+            textAlignVertical="bottom"
+            editable={false} />
         {showLiveResult && <Text style={styles.result}>{result}</Text>}
     </View>
 
@@ -194,19 +216,19 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
 
     const Scientific = () => <View style={{ flex: 3 }}>
         <View style={styles.row}>
-            <TouchableOpacity style={styles.button} onPressIn={() => buttonPressed("deg")}>
+            <TouchableOpacity style={styles.button} onPressIn={() => numPressed("deg")}>
                 <StyledText style={styles.button}>deg</StyledText>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPressIn={() => buttonPressed("rad")}>
+            <TouchableOpacity style={styles.button} onPressIn={() => numPressed("rad")}>
                 <StyledText style={styles.button}>rad</StyledText>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPressIn={() => buttonPressed("π")}>
+            <TouchableOpacity style={styles.button} onPressIn={() => numPressed("π", `π = ${22 / 7}`)}>
                 <StyledText style={styles.button}>π</StyledText>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPressIn={() => buttonPressed("e")}>
+            <TouchableOpacity style={styles.button} onPressIn={() => numPressed("e", `e = ${Math.E}`)}>
                 <StyledText style={styles.button}>e</StyledText>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPressIn={() => functionPressed("exp(")}>
+            <TouchableOpacity style={styles.button} onPressIn={() => functionPressed("exp(", "exp(x) - e to the power of x")}>
                 <StyledText style={styles.button}>Exp</StyledText>
             </TouchableOpacity>
         </View>
@@ -241,7 +263,7 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
                     onPress: () => functionPressed("tan(")
                 }}
             />
-            <TouchableOpacity style={styles.button} onPressIn={() => functionPressed("ln(")}>
+            <TouchableOpacity style={styles.button} onPressIn={() => functionPressed("ln(", "Natural Log(x)")}>
                 <StyledText style={styles.button}>ln</StyledText>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPressIn={() => functionPressed("log(")}>
@@ -290,16 +312,16 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
 
     const Actions = () => <View style={{ flex: 5 }}>
         <View style={styles.row}>
-            <TouchableOpacity style={styles.button} onPressIn={() => functionPressed("sqrt(")}>
+            <TouchableOpacity style={styles.button} onPressIn={() => functionPressed("sqrt(", "square root = √x")}>
                 <StyledText style={styles.button}>√</StyledText>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => buttonPressed("(")} onLongPress={() => buttonPressed(")")} >
-                <StyledText style={styles.button}>()</StyledText>
+            <TouchableOpacity style={styles.button} onPress={() => buttonPressed("(", `long press for entering ")"`)} onLongPress={() => buttonPressed(")")} >
+                <StyledText style={styles.button}>( )</StyledText>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPressIn={() => buttonPressed("!")}>
+            <TouchableOpacity style={styles.button} onPressIn={() => buttonPressed("!", "Factorial")}>
                 <StyledText style={styles.button}>n!</StyledText>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPressIn={() => buttonPressed("%")}>
+            <TouchableOpacity style={styles.button} onPressIn={() => buttonPressed("%", " x % y (x modulo y)")}>
                 <StyledText style={styles.button}>%</StyledText>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPressIn={() => buttonPressed("/")}>
@@ -307,7 +329,7 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
             </TouchableOpacity>
         </View>
         <View style={styles.row}>
-            <TouchableOpacity style={styles.button} onPressIn={() => functionPressed("cbrt(")}>
+            <TouchableOpacity style={styles.button} onPressIn={() => functionPressed("cbrt(", "cube root = ∛x")}>
                 <StyledText style={styles.button}>∛</StyledText>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonNumber} onPressIn={() => numPressed("7")}>
@@ -324,7 +346,7 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
             </TouchableOpacity>
         </View>
         <View style={styles.row}>
-            <TouchableOpacity style={styles.button} onPressIn={() => buttonPressed("^")}>
+            <TouchableOpacity style={styles.button} onPressIn={() => buttonPressed("^", "x^y (x raised to the power of y)")}>
                 <SuperScriptText style={styles.button} text="x" supText="y" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonNumber} onPressIn={() => numPressed("4")}>
@@ -378,9 +400,12 @@ const Calculators = ({ showLiveResult, scientific: showScientific, customize, th
 
     return (
         !isLoading && <View style={styles.container}>
+            {(tooltipEnabled || historyEnabled) && <ToolTipHistory />}
             <Display />
-            {showScientific && <Scientific />}
-            <Actions />
+            <View style={{ position: "relative", flex: 7 }}>
+                {showScientific && <Scientific />}
+                <Actions />
+            </View>
         </View>
     );
 }
